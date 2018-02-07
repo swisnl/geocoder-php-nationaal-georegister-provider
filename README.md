@@ -6,7 +6,10 @@
 [![Run Status](https://api.shippable.com/projects/5a7add088abc8b06009fa8de/badge?branch=master)](https://app.shippable.com/github/swisnl/geocoder-php-nationaal-georegister-provider)
 [![Coverage Badge](https://api.shippable.com/projects/5a7add088abc8b06009fa8de/coverageBadge?branch=master)](https://app.shippable.com/github/swisnl/geocoder-php-nationaal-georegister-provider)
 
-This is the [Nationaal Georegister](https://geodata.nationaalgeoregister.nl/) provider from the [PHP Geocoder](https://github.com/geocoder-php/Geocoder). Please see PHP Geocoder documentation for information about using this provider.
+This is the [Nationaal Georegister](https://geodata.nationaalgeoregister.nl/) provider from the [PHP Geocoder](https://github.com/geocoder-php/Geocoder).
+See PHP Geocoder documentation for information about using this provider.
+
+Please note that this provider can only geocode addresses in The Netherlands.
 
 ## Install
 
