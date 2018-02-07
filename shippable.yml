@@ -1,0 +1,18 @@
+language: php
+
+php:
+  - "7.0"
+  - "7.1"
+
+build:
+  ci:
+    # Setup
+    - composer global require hirak/prestissimo
+    - mkdir -p shippable/testresults
+    - mkdir -p shippable/codecoverage
+
+    # Install
+    - composer install
+
+    # Tests
+    - vendor/bin/phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage

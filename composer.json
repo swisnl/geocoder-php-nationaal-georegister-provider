@@ -1,0 +1,53 @@
+{
+    "name": "swisnl/geocoder-php-nationaal-georegister-provider",
+    "description": "Nationaal Georegister provider for Geocoder PHP",
+    "type": "library",
+    "keywords": [
+        "swisnl",
+        "swis",
+        "nationaal-georegister",
+        "ngr",
+        "geocoder",
+        "provider"
+    ],
+    "homepage": "https://github.com/swisnl/geocoder-php-nationaal-georegister-provider",
+    "require": {
+        "php": "^7.0",
+        "geocoder-php/common-http": "^4.0",
+        "proj4php/proj4php": "^2.0",
+        "willdurand/geocoder": "^4.0"
+    },
+    "require-dev": {
+        "geocoder-php/provider-integration-tests": "^1.0",
+        "php-http/curl-client": "^1.7",
+        "phpunit/phpunit": "^6.0"
+    },
+    "provide": {
+        "geocoder-php/provider-implementation": "1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jasper Zonneveld",
+            "email": "jasper@swis.nl",
+            "homepage": "https://www.swis.nl/over-ons/jasper-zonneveld",
+            "role": "Developer"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "autoload": {
+        "psr-4": {
+            "Swis\\Geocoder\\NationaalGeoregister\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Swis\\Geocoder\\NationaalGeoregister\\Tests\\": "tests/"
+        }
+    }
+}
