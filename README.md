@@ -9,6 +9,8 @@
 This is the [Nationaal Georegister](https://geodata.nationaalgeoregister.nl/) provider for the [PHP Geocoder](https://github.com/geocoder-php/Geocoder).
 See PHP Geocoder documentation for information about using this provider.
 
+https://github.com/PDOK/locatieserver/wiki/API-Locatieserver
+
 Please note that this provider can only geocode addresses in The Netherlands.
 
 ## Install

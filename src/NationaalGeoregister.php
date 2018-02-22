@@ -13,25 +13,72 @@ use Geocoder\Model\AddressCollection;
 use Geocoder\Provider\Provider;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\Query\ReverseQuery;
-use proj4php\Point;
-use proj4php\Proj;
-use proj4php\Proj4php;
+use Http\Client\HttpClient;
 
 class NationaalGeoregister extends AbstractHttpProvider implements Provider
 {
     /**
      * @var string
      */
-    const GEOCODE_ENDPOINT_URL_SSL = 'https://geodata.nationaalgeoregister.nl/geocoder/Geocoder?zoekterm=%s';
+    const GEOCODE_ENDPOINT_URL_SSL = 'https://geodata.nationaalgeoregister.nl/locatieserver/v3/free?rows=%d&%s&q=%s';
 
     /**
-     * @var string
+     * @var string[]
      */
-    const RD_SRS_CODE = '+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.999908 +x_0=155000 +y_0=463000 +ellps=bessel +units=m +towgs84=565.2369,50.0087,465.658,-0.406857330322398,0.350732676542563,-1.8703473836068,4.0812 +no_defs <>';
+    const BLACKLISTED_OPTIONS = [
+        'fl',
+        'q',
+        'rows',
+        'wt',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $defaultOptions = [
+        'bq' => 'type:gemeente^0.5 type:woonplaats^0.5 type:weg^1.0 type:postcode^1.5 type:adres^1.5',
+        'fl' => 'centroide_ll,huis_nlt,huisnummer,straatnaam,postcode,woonplaatsnaam,gemeentenaam,gemeentecode,provincienaam,provinciecode',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * @param \Http\Client\HttpClient $client An HTTP adapter
+     * @param array                   $options Extra query parameters (optional)
+     */
+    public function __construct(HttpClient $client, array $options = [])
+    {
+        parent::__construct($client);
+
+        $this->setOptions($options);
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param array $options
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = array_merge(
+            $this->defaultOptions,
+            array_diff_key($options, array_fill_keys(self::BLACKLISTED_OPTIONS, true))
+        );
+    }
 
     /**
      * @param \Geocoder\Query\GeocodeQuery $query
      *
+     * @throws \Geocoder\Exception\InvalidServerResponse
      * @throws \Geocoder\Exception\UnsupportedOperation
      *
      * @return \Geocoder\Collection
@@ -44,7 +91,14 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
             throw new UnsupportedOperation('The NationaalGeoregister provider does not support IP addresses.');
         }
 
-        return $this->executeQuery(sprintf(self::GEOCODE_ENDPOINT_URL_SSL, rawurlencode($address)));
+        return $this->executeQuery(
+            sprintf(
+                self::GEOCODE_ENDPOINT_URL_SSL,
+                $query->getLimit(),
+                http_build_query($this->options),
+                rawurlencode($address)
+            )
+        );
     }
 
     /**
@@ -71,55 +125,38 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
      * @param string $query
      *
      * @throws \Geocoder\Exception\InvalidServerResponse
-     * @throws \Geocoder\Exception\CollectionIsEmpty
      *
      * @return \Geocoder\Model\AddressCollection
      */
     protected function executeQuery(string $query): AddressCollection
     {
-        $xml = $this->getResultsAsXmlForQuery($query);
+        $results = $this->getResultsForQuery($query);
 
-        $numberOfGeocodedAddresses = 0;
-        $elements = $xml->xpath('//xls:GeocodeResponseList/@numberOfGeocodedAddresses');
-
-        if (\is_array($elements) && \count($elements) > 0) {
-            $numberOfGeocodedAddresses = (int)$elements[0]['numberOfGeocodedAddresses'];
-        }
-
-        $results = [];
-        for ($i = 1; $i <= $numberOfGeocodedAddresses; ++$i) {
-            if ($numberOfGeocodedAddresses === 1) {
-                $addressXls = 'xls:GeocodedAddress';
-            } else {
-                $addressXls = 'xls:GeocodedAddress['.$i.']';
-            }
-
-            $positions = $xml->xpath('//'.$addressXls.'/gml:Point/gml:pos');
-            $postalCode = $xml->xpath('//'.$addressXls.'/xls:Address/xls:PostalCode');
-            $locality = $xml->xpath('//'.$addressXls.'/xls:Address/xls:Place[@type="Municipality"]');
-            $subLocality = $xml->xpath('//'.$addressXls.'/xls:Address/xls:Place[@type="MunicipalitySubdivision"]');
-            $streetNumber = $xml->xpath('//'.$addressXls.'/xls:Address/xls:StreetAddress/xls:Building');
-            $cityDistrict = $xml->xpath('//'.$addressXls.'/xls:Address/xls:StreetAddress/xls:Street');
-
-            $position = explode(' ', (string)$positions[0]);
-            $point = $this->projectPoint((float)$position[0], (float)$position[1]);
+        $addresses = [];
+        foreach ($results->response->docs as $doc) {
+            $position = explode(' ', trim(str_replace(['POINT(', ')'], '', $doc->centroide_ll)));
 
             $builder = new AddressBuilder($this->getName());
 
-            $builder->setCoordinates($point->y, $point->x);
-            $builder->setStreetNumber($this->getStreetNumber($streetNumber));
-            $builder->setStreetName($this->getItem($cityDistrict));
-            $builder->setPostalCode($this->getItem($postalCode));
-            $builder->setLocality($this->getItem($locality));
-            $builder->setSubLocality($this->getItem($subLocality));
+            $builder->setCoordinates((float)$position[1], (float)$position[0]);
+            $builder->setStreetNumber($doc->huis_nlt ?? $doc->huisnummer ?? null);
+            $builder->setStreetName($doc->straatnaam ?? null);
+            $builder->setPostalCode($doc->postcode ?? null);
+            $builder->setLocality($doc->woonplaatsnaam ?? null);
+            if ($doc->gemeentenaam) {
+                $builder->addAdminLevel(2, $doc->gemeentenaam, $doc->gemeentecode);
+            }
+            if ($doc->provincienaam) {
+                $builder->addAdminLevel(1, $doc->provincienaam, $doc->provinciecode);
+            }
             $builder->setCountry('Netherlands');
             $builder->setCountryCode('NL');
             $builder->setTimezone('Europe/Amsterdam');
 
-            $results[] = $builder->build();
+            $addresses[] = $builder->build();
         }
 
-        return new AddressCollection($results);
+        return new AddressCollection($addresses);
     }
 
     /**
@@ -127,68 +164,18 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
      *
      * @throws \Geocoder\Exception\InvalidServerResponse
      *
-     * @return \SimpleXMLElement
+     * @return \stdClass
      */
-    protected function getResultsAsXmlForQuery(string $query): \SimpleXMLElement
+    protected function getResultsForQuery(string $query): \stdClass
     {
         $content = $this->getUrlContents($query);
 
-        $doc = new \DOMDocument();
-        if (!@$doc->loadXML($content)) {
+        $result = json_decode($content);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
             throw new InvalidServerResponse(sprintf('Could not execute query "%s"', $query));
         }
 
-        $xml = new \SimpleXMLElement($content);
-        if (isset($xml->ErrorList->Error) || null === $xml->GeocodeResponse) {
-            throw new InvalidServerResponse(sprintf('Could not execute query "%s"', $query));
-        }
-
-        $xml->registerXPathNamespace('gml', 'http://www.opengis.net/gml');
-        $xml->registerXPathNamespace('xls', 'http://www.opengis.net/xls');
-
-        return $xml;
-    }
-
-    /**
-     * Because Nationaal Georegister always uses EPSG:28922 projection we need to convert this result to EPSG:4326.
-     *
-     * @param float $x
-     * @param float $y
-     *
-     * @return \proj4php\Point
-     */
-    protected function projectPoint(float $x, float $y): Point
-    {
-        $proj = new Proj4php();
-        $rdProjection = new Proj(self::RD_SRS_CODE, $proj);
-        $wgsProjection = new Proj('EPSG:4326', $proj);
-        $rdPoint = new Point($x, $y, null, $rdProjection);
-
-        return $proj->transform($wgsProjection, $rdPoint);
-    }
-
-    /**
-     * @param array $items
-     * @param int   $i
-     *
-     * @return string|null
-     */
-    protected function getItem(array $items, int $i = 0)
-    {
-        return isset($items[$i]) ? (string)$items[$i] : null;
-    }
-
-    /**
-     * @param \SimpleXMLElement[] $items
-     *
-     * @return string|null
-     */
-    protected function getStreetNumber(array $items)
-    {
-        if (!isset($items[0])) {
-            return null;
-        }
-
-        return trim(sprintf('%s %s', $items[0]['number'], $items[0]['subdivision']));
+        return $result;
     }
 }

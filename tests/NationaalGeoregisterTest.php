@@ -18,6 +18,31 @@ class NationaalGeoregisterTest extends BaseTestCase
         return __DIR__.'/.cached_responses';
     }
 
+    public function testExtraOptionsCanBeSet()
+    {
+        $provider = new NationaalGeoregister($this->getMockedHttpClient(), ['ident' => 'true']);
+        $this->assertEquals(
+            [
+                'bq'    => 'type:gemeente^0.5 type:woonplaats^0.5 type:weg^1.0 type:postcode^1.5 type:adres^1.5',
+                'fl'    => 'centroide_ll,huis_nlt,huisnummer,straatnaam,postcode,woonplaatsnaam,gemeentenaam,gemeentecode,provincienaam,provinciecode',
+                'ident' => 'true'
+            ],
+            $provider->getOptions()
+        );
+    }
+
+    public function testBlacklistedOptionsCanNotBeSet()
+    {
+        $provider = new NationaalGeoregister($this->getMockedHttpClient(), ['fl' => '*']);
+        $this->assertEquals(
+            [
+                'bq' => 'type:gemeente^0.5 type:woonplaats^0.5 type:weg^1.0 type:postcode^1.5 type:adres^1.5',
+                'fl' => 'centroide_ll,huis_nlt,huisnummer,straatnaam,postcode,woonplaatsnaam,gemeentenaam,gemeentecode,provincienaam,provinciecode',
+            ],
+            $provider->getOptions()
+        );
+    }
+
     public function testGetName()
     {
         $provider = new NationaalGeoregister($this->getMockedHttpClient());
@@ -40,18 +65,19 @@ class NationaalGeoregisterTest extends BaseTestCase
         $results = $provider->geocodeQuery(GeocodeQuery::create('2312 NR'));
 
         $this->assertInstanceOf(AddressCollection::class, $results);
-        $this->assertCount(1, $results);
+        $this->assertCount(5, $results);
 
         /** @var \Geocoder\Location $result */
         $result = $results->first();
         $this->assertInstanceOf(Address::class, $result);
-        $this->assertEquals(52.164126034022, $result->getCoordinates()->getLatitude());
-        $this->assertEquals(4.4909862296993, $result->getCoordinates()->getLongitude());
+        $this->assertEquals(52.16416908, $result->getCoordinates()->getLatitude(), '', 0.001);
+        $this->assertEquals(4.49098397, $result->getCoordinates()->getLongitude(), '', 0.001);
         $this->assertNull($result->getStreetNumber());
         $this->assertEquals('3e Binnenvestgracht', $result->getStreetName());
-        $this->assertEquals('Leiden', $result->getSubLocality());
-        $this->assertEquals('Leiden', $result->getLocality());
         $this->assertEquals('2312NR', $result->getPostalCode());
+        $this->assertEquals('Leiden', $result->getLocality());
+        $this->assertEquals('Leiden', $result->getAdminLevels()->get(2)->getName());
+        $this->assertEquals('Zuid-Holland', $result->getAdminLevels()->get(1)->getName());
         $this->assertEquals('Netherlands', $result->getCountry()->getName());
         $this->assertEquals('NL', $result->getCountry()->getCode());
         $this->assertEquals('Europe/Amsterdam', $result->getTimezone());
@@ -64,18 +90,19 @@ class NationaalGeoregisterTest extends BaseTestCase
         $results = $provider->geocodeQuery(GeocodeQuery::create('2312 NR, 23'));
 
         $this->assertInstanceOf(AddressCollection::class, $results);
-        $this->assertCount(26, $results);
+        $this->assertCount(5, $results);
 
         /** @var \Geocoder\Location $result */
         $result = $results->first();
         $this->assertInstanceOf(Address::class, $result);
-        $this->assertEquals(52.164240457184, $result->getCoordinates()->getLatitude());
-        $this->assertEquals(4.4920253282062, $result->getCoordinates()->getLongitude());
-        $this->assertEquals('23 T', $result->getStreetNumber());
+        $this->assertEquals(52.16416908, $result->getCoordinates()->getLatitude(), '', 0.001);
+        $this->assertEquals(4.49098397, $result->getCoordinates()->getLongitude(), '', 0.001);
+        $this->assertEquals('23A', $result->getStreetNumber());
         $this->assertEquals('3e Binnenvestgracht', $result->getStreetName());
-        $this->assertEquals('Leiden', $result->getSubLocality());
-        $this->assertEquals('Leiden', $result->getLocality());
         $this->assertEquals('2312NR', $result->getPostalCode());
+        $this->assertEquals('Leiden', $result->getLocality());
+        $this->assertEquals('Leiden', $result->getAdminLevels()->get(2)->getName());
+        $this->assertEquals('Zuid-Holland', $result->getAdminLevels()->get(1)->getName());
         $this->assertEquals('Netherlands', $result->getCountry()->getName());
         $this->assertEquals('NL', $result->getCountry()->getCode());
         $this->assertEquals('Europe/Amsterdam', $result->getTimezone());
@@ -88,18 +115,19 @@ class NationaalGeoregisterTest extends BaseTestCase
         $results = $provider->geocodeQuery(GeocodeQuery::create('3e Binnenvestgracht 23'));
 
         $this->assertInstanceOf(AddressCollection::class, $results);
-        $this->assertCount(26, $results);
+        $this->assertCount(5, $results);
 
         /** @var \Geocoder\Location $result */
         $result = $results->first();
         $this->assertInstanceOf(Address::class, $result);
-        $this->assertEquals(52.164240457184, $result->getCoordinates()->getLatitude());
-        $this->assertEquals(4.4920253282062, $result->getCoordinates()->getLongitude());
-        $this->assertEquals('23 T', $result->getStreetNumber());
+        $this->assertEquals(52.16416908, $result->getCoordinates()->getLatitude(), '', 0.001);
+        $this->assertEquals(4.49098397, $result->getCoordinates()->getLongitude(), '', 0.001);
+        $this->assertEquals('23A', $result->getStreetNumber());
         $this->assertEquals('3e Binnenvestgracht', $result->getStreetName());
-        $this->assertEquals('Leiden', $result->getSubLocality());
-        $this->assertEquals('Leiden', $result->getLocality());
         $this->assertEquals('2312NR', $result->getPostalCode());
+        $this->assertEquals('Leiden', $result->getLocality());
+        $this->assertEquals('Leiden', $result->getAdminLevels()->get(2)->getName());
+        $this->assertEquals('Zuid-Holland', $result->getAdminLevels()->get(1)->getName());
         $this->assertEquals('Netherlands', $result->getCountry()->getName());
         $this->assertEquals('NL', $result->getCountry()->getCode());
         $this->assertEquals('Europe/Amsterdam', $result->getTimezone());
@@ -112,18 +140,19 @@ class NationaalGeoregisterTest extends BaseTestCase
         $results = $provider->geocodeQuery(GeocodeQuery::create('3e Binnenvestgracht 23, Leiden'));
 
         $this->assertInstanceOf(AddressCollection::class, $results);
-        $this->assertCount(26, $results);
+        $this->assertCount(5, $results);
 
         /** @var \Geocoder\Location $result */
         $result = $results->first();
         $this->assertInstanceOf(Address::class, $result);
-        $this->assertEquals(52.164240457184, $result->getCoordinates()->getLatitude());
-        $this->assertEquals(4.4920253282062, $result->getCoordinates()->getLongitude());
-        $this->assertEquals('23 T', $result->getStreetNumber());
+        $this->assertEquals(52.16416908, $result->getCoordinates()->getLatitude(), '', 0.001);
+        $this->assertEquals(4.49098397, $result->getCoordinates()->getLongitude(), '', 0.001);
+        $this->assertEquals('23A', $result->getStreetNumber());
         $this->assertEquals('3e Binnenvestgracht', $result->getStreetName());
-        $this->assertEquals('Leiden', $result->getSubLocality());
-        $this->assertEquals('Leiden', $result->getLocality());
         $this->assertEquals('2312NR', $result->getPostalCode());
+        $this->assertEquals('Leiden', $result->getLocality());
+        $this->assertEquals('Leiden', $result->getAdminLevels()->get(2)->getName());
+        $this->assertEquals('Zuid-Holland', $result->getAdminLevels()->get(1)->getName());
         $this->assertEquals('Netherlands', $result->getCountry()->getName());
         $this->assertEquals('NL', $result->getCountry()->getCode());
         $this->assertEquals('Europe/Amsterdam', $result->getTimezone());
