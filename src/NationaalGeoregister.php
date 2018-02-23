@@ -20,14 +20,13 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
     /**
      * @var string
      */
-    const GEOCODE_ENDPOINT_URL_SSL = 'https://geodata.nationaalgeoregister.nl/locatieserver/v3/free?rows=%d&%s&q=%s';
+    const ENDPOINT_URL_SSL = 'https://geodata.nationaalgeoregister.nl/locatieserver/v3/free?%s';
 
     /**
      * @var string[]
      */
     const BLACKLISTED_OPTIONS = [
         'fl',
-        'q',
         'rows',
         'wt',
     ];
@@ -35,9 +34,21 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
     /**
      * @var array
      */
-    protected $defaultOptions = [
+    const DEFAULT_OPTIONS = [
         'bq' => 'type:gemeente^0.5 type:woonplaats^0.5 type:weg^1.0 type:postcode^1.5 type:adres^1.5',
         'fl' => 'centroide_ll,huis_nlt,huisnummer,straatnaam,postcode,woonplaatsnaam,gemeentenaam,gemeentecode,provincienaam,provinciecode',
+    ];
+
+    /**
+     * @var array
+     */
+    const REQUIRED_OPTIONS_GEOCODE = [];
+
+    /**
+     * @var array
+     */
+    const REQUIRED_OPTIONS_REVERSE = [
+        'fq' => 'type:adres',
     ];
 
     /**
@@ -46,7 +57,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
     protected $options = [];
 
     /**
-     * @param \Http\Client\HttpClient $client An HTTP adapter
+     * @param \Http\Client\HttpClient $client  An HTTP adapter
      * @param array                   $options Extra query parameters (optional)
      */
     public function __construct(HttpClient $client, array $options = [])
@@ -69,10 +80,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
      */
     public function setOptions(array $options)
     {
-        $this->options = array_merge(
-            $this->defaultOptions,
-            array_diff_key($options, array_fill_keys(self::BLACKLISTED_OPTIONS, true))
-        );
+        $this->options = array_diff_key($options, array_fill_keys(self::BLACKLISTED_OPTIONS, true));
     }
 
     /**
@@ -85,32 +93,61 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
      */
     public function geocodeQuery(GeocodeQuery $query): Collection
     {
-        $address = $query->getText();
         // This API doesn't handle IPs.
-        if (filter_var($address, FILTER_VALIDATE_IP)) {
+        if (filter_var($query->getText(), FILTER_VALIDATE_IP)) {
             throw new UnsupportedOperation('The NationaalGeoregister provider does not support IP addresses.');
         }
 
-        return $this->executeQuery(
-            sprintf(
-                self::GEOCODE_ENDPOINT_URL_SSL,
-                $query->getLimit(),
-                http_build_query($this->options),
-                rawurlencode($address)
-            )
+        return $this->executeQuery(sprintf(self::ENDPOINT_URL_SSL, http_build_query($this->getGeocodeOptions($query))));
+    }
+
+    /**
+     * @param \Geocoder\Query\GeocodeQuery $query
+     *
+     * @return array
+     */
+    protected function getGeocodeOptions(GeocodeQuery $query): array
+    {
+        return array_merge(
+            static::DEFAULT_OPTIONS,
+            $this->options,
+            static::REQUIRED_OPTIONS_GEOCODE,
+            [
+                'rows' => $query->getLimit(),
+                'q'    => $query->getText(),
+            ]
         );
     }
 
     /**
      * @param \Geocoder\Query\ReverseQuery $query
      *
-     * @throws \Geocoder\Exception\UnsupportedOperation
+     * @throws \Geocoder\Exception\InvalidServerResponse
      *
      * @return \Geocoder\Collection
      */
     public function reverseQuery(ReverseQuery $query): Collection
     {
-        throw new UnsupportedOperation('The NationaalGeoregister provider is not able to do reverse geocoding.');
+        return $this->executeQuery(sprintf(self::ENDPOINT_URL_SSL, http_build_query($this->getReverseOptions($query))));
+    }
+
+    /**
+     * @param \Geocoder\Query\ReverseQuery $query
+     *
+     * @return array
+     */
+    protected function getReverseOptions(ReverseQuery $query): array
+    {
+        return array_merge(
+            static::DEFAULT_OPTIONS,
+            $this->options,
+            static::REQUIRED_OPTIONS_REVERSE,
+            [
+                'rows' => $query->getLimit(),
+                'lat'  => $query->getCoordinates()->getLatitude(),
+                'lon'  => $query->getCoordinates()->getLongitude(),
+            ]
+        );
     }
 
     /**

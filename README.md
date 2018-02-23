@@ -7,8 +7,9 @@
 [![Coverage Badge](https://api.shippable.com/projects/5a7add088abc8b06009fa8de/coverageBadge?branch=master)](https://app.shippable.com/github/swisnl/geocoder-php-nationaal-georegister-provider)
 
 This is the [Nationaal Georegister](https://geodata.nationaalgeoregister.nl/) provider for the [PHP Geocoder](https://github.com/geocoder-php/Geocoder), which uses the [PDOK Locatieserver v3 (Dutch)](https://www.pdok.nl/nl/producten/pdok-locatieserver).
+It can geocode addresses (not IP addresses) and reverse geocode coordinates.
 
-Please note that this provider can only geocode addresses in The Netherlands!
+Please note that this provider can only (reverse) geocode addresses in The Netherlands!
 
 ## Install
 
@@ -50,10 +51,10 @@ These options are directly passed to the Locatieserver, which accepts the follow
 | bq      | Boost query            | "type:gemeente^0.5 type:woonplaats^0.5 type:weg^1.0 type:postcode^1.5 type:adres^1.5" | yes |
 | df      | Default field          | - | yes |
 | fl      | Field list             | All fields used by this provider | no |
-| fq      | Filter query           | - | yes |
-| lat&lon | Latitude and longitude | - | yes |
-| q       | Search term            | Text from `\Geocoder\Query\GeocodeQuery` | no |
-| rows    | Amount of rows         | Limit from `\Geocoder\Query\GeocodeQuery` | no |
+| fq      | Filter query           | "type:adres" when reverse geocoding | only for geocoding |
+| lat&lon | Latitude and longitude | Coordinates from `\Geocoder\Query\ReverseQuery` when reverse geocoding | only for geocoding |
+| q       | Search term            | Text from `\Geocoder\Query\GeocodeQuery` when geocoding | only for reverse geocoding |
+| rows    | Amount of rows         | Limit from query | no |
 | start   | Page (starting at 0)   | - | yes |
 | sort    | Sorting                | See [Locatieserver documentation (Dutch)](https://github.com/PDOK/locatieserver/wiki/API-Locatieserver#52url-parameters) | yes |
 | wt      | Format                 | JSON | no |
