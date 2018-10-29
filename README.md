@@ -2,9 +2,11 @@
 
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/swisnl/geocoder-php-nationaal-georegister-provider.svg)](https://packagist.org/packages/swisnl/geocoder-php-nationaal-georegister-provider)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/swisnl/geocoder-php-nationaal-georegister-provider.svg)](https://packagist.org/packages/swisnl/geocoder-php-nationaal-georegister-provider)
-[![Software License](https://img.shields.io/packagist/l/swisnl/geocoder-php-nationaal-georegister-provider.svg)](LICENSE) 
+[![Software License](https://img.shields.io/packagist/l/swisnl/geocoder-php-nationaal-georegister-provider.svg)](LICENSE.md) 
 [![Run Status](https://api.shippable.com/projects/5a7add088abc8b06009fa8de/badge?branch=master)](https://app.shippable.com/github/swisnl/geocoder-php-nationaal-georegister-provider)
 [![Coverage Badge](https://api.shippable.com/projects/5a7add088abc8b06009fa8de/coverageBadge?branch=master)](https://app.shippable.com/github/swisnl/geocoder-php-nationaal-georegister-provider)
+[![Total Downloads](https://img.shields.io/packagist/dt/swisnl/geocoder-php-nationaal-georegister-provider.svg)](https://packagist.org/packages/swisnl/geocoder-php-nationaal-georegister-provider)
+[![Made by SWIS](https://img.shields.io/badge/%F0%9F%9A%80-made%20by%20SWIS-%23D9021B.svg)](https://www.swis.nl)
 
 This is the [Nationaal Georegister](https://geodata.nationaalgeoregister.nl/) provider for the [PHP Geocoder](https://github.com/geocoder-php/Geocoder), which uses the [PDOK Locatieserver v3 (Dutch)](https://www.pdok.nl/nl/producten/pdok-locatieserver).
 It can geocode addresses (not IP addresses) and reverse geocode coordinates.
@@ -13,8 +15,10 @@ Please note that this provider can only (reverse) geocode addresses in The Nethe
 
 ## Install
 
-```bash
-composer require swisnl/geocoder-php-nationaal-georegister-provider
+Via Composer
+
+``` bash
+$ composer require swisnl/geocoder-php-nationaal-georegister-provider
 ```
 
 ### HTTP Client
@@ -24,7 +28,7 @@ This requires another package providing [php-http/client-implementation](https:/
 To use Guzzle 6, for example, simply require `php-http/guzzle6-adapter`:
 
 ``` bash
-composer require php-http/guzzle6-adapter
+$ composer require php-http/guzzle6-adapter
 ```
 
 ## Usage
@@ -94,6 +98,29 @@ $address->getCountryCode() => 'NL' (static)
 $address->getTimezone() => 'Europe/Amsterdam' (static)
 ```
 
+## Change log
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+## Testing
+
+``` bash
+$ composer test
+```
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
+
+## Security
+
+If you discover any security related issues, please email security@swis.nl instead of using the issue tracker.
+
+## Credits
+
+- [Jasper Zonneveld](https://github.com/JaZo)
+- [All Contributors](../../contributors)
+
 ## License
 
-`geocoder-php-nationaal-georegister-provider` is licensed under the MIT License - see the LICENSE file for details
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
