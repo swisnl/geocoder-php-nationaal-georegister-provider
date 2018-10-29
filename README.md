@@ -8,7 +8,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/swisnl/geocoder-php-nationaal-georegister-provider.svg)](https://packagist.org/packages/swisnl/geocoder-php-nationaal-georegister-provider)
 [![Made by SWIS](https://img.shields.io/badge/%F0%9F%9A%80-made%20by%20SWIS-%23D9021B.svg)](https://www.swis.nl)
 
-This is the [Nationaal Georegister](https://geodata.nationaalgeoregister.nl/) provider for the [PHP Geocoder](https://github.com/geocoder-php/Geocoder), which uses the [PDOK Locatieserver v3 (Dutch)](https://www.pdok.nl/nl/producten/pdok-locatieserver).
+This is the [Nationaal Georegister](https://geodata.nationaalgeoregister.nl/) provider for the [PHP Geocoder](https://github.com/geocoder-php/Geocoder), which uses the [PDOK Locatieserver v3 (Dutch)](https://www.pdok.nl/diensten#PDOK%20Locatieserver).
 It can geocode addresses (not IP addresses) and reverse geocode coordinates.
 
 Please note that this provider can only (reverse) geocode addresses in The Netherlands!
