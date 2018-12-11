@@ -13,6 +13,7 @@
     "homepage": "https://github.com/swisnl/geocoder-php-nationaal-georegister-provider",
     "require": {
         "php": "^7.0",
+        "ext-json": "*",
         "geocoder-php/common-http": "^4.0",
         "willdurand/geocoder": "^4.0"
     },

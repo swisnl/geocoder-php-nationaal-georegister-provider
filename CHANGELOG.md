@@ -4,6 +4,12 @@ All notable changes to `swisnl/geocoder-php-nationaal-georegister-provider` will
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [Unreleased]
+
+### Added
+
+- Add ext-json to composer.json
+
 ## [1.1.0] - 2018-02-27
 
 ### Changed
