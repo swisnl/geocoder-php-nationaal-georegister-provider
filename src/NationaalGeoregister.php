@@ -20,7 +20,12 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
     /**
      * @var string
      */
-    const ENDPOINT_URL_SSL = 'https://geodata.nationaalgeoregister.nl/locatieserver/v3/free?%s';
+    const ENDPOINT_URL_FREE = 'https://geodata.nationaalgeoregister.nl/locatieserver/v3/free?%s';
+
+    /**
+     * @var string
+     */
+    const ENDPOINT_URL_REVERSE = 'https://geodata.nationaalgeoregister.nl/locatieserver/revgeo?%s';
 
     /**
      * @var string[]
@@ -28,6 +33,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
     const BLACKLISTED_OPTIONS = [
         'fl',
         'rows',
+        'type',
         'wt',
     ];
 
@@ -48,7 +54,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
      * @var array
      */
     const REQUIRED_OPTIONS_REVERSE = [
-        'fq' => 'type:adres',
+        'type' => 'adres',
     ];
 
     /**
@@ -98,7 +104,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
             throw new UnsupportedOperation('The NationaalGeoregister provider does not support IP addresses.');
         }
 
-        return $this->executeQuery(sprintf(self::ENDPOINT_URL_SSL, http_build_query($this->getGeocodeOptions($query))));
+        return $this->executeQuery(sprintf(self::ENDPOINT_URL_FREE, http_build_query($this->getGeocodeOptions($query))));
     }
 
     /**
@@ -128,7 +134,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
      */
     public function reverseQuery(ReverseQuery $query): Collection
     {
-        return $this->executeQuery(sprintf(self::ENDPOINT_URL_SSL, http_build_query($this->getReverseOptions($query))));
+        return $this->executeQuery(sprintf(self::ENDPOINT_URL_REVERSE, http_build_query($this->getReverseOptions($query))));
     }
 
     /**

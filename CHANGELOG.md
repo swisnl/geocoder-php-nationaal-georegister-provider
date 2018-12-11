@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Add ext-json to composer.json
 
+### Changed
+
+- Use official reverse geocoder endpoint instead of workaround
+
 ## [1.1.0] - 2018-02-27
 
 ### Changed

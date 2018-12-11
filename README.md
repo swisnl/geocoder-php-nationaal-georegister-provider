@@ -55,9 +55,9 @@ These options are directly passed to the Locatieserver, which accepts the follow
 | bq      | Boost query            | "type:gemeente^0.5 type:woonplaats^0.5 type:weg^1.0 type:postcode^1.5 type:adres^1.5" | yes |
 | df      | Default field          | - | yes |
 | fl      | Field list             | All fields used by this provider | no |
-| fq      | Filter query           | "type:adres" when reverse geocoding | only for geocoding |
+| fq      | Filter query           | - | yes |
 | lat&lon | Latitude and longitude | Coordinates from `\Geocoder\Query\ReverseQuery` when reverse geocoding | only for geocoding |
-| q       | Search term            | Text from `\Geocoder\Query\GeocodeQuery` when geocoding | only for reverse geocoding |
+| q       | Search term            | Text from `\Geocoder\Query\GeocodeQuery` when geocoding | no |
 | rows    | Amount of rows         | Limit from query | no |
 | start   | Page (starting at 0)   | - | yes |
 | sort    | Sorting                | See [Locatieserver documentation (Dutch)](https://github.com/PDOK/locatieserver/wiki/API-Locatieserver#52url-parameters) | yes |
