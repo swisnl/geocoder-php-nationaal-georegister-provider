@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
+- Nothing
+
+## [1.2.0] - 2018-12-11
+
 ### Added
 
 - Add ext-json to composer.json
