@@ -46,6 +46,31 @@ class NationaalGeoregisterTest extends BaseTestCase
         $provider->geocodeQuery(GeocodeQuery::create('8.8.8.8'));
     }
 
+    public function testGeocodeWithShortPostalCode()
+    {
+        $provider = new NationaalGeoregister($this->getHttpClient());
+        $results = $provider->geocodeQuery(GeocodeQuery::create('2312'));
+
+        $this->assertInstanceOf(AddressCollection::class, $results);
+        $this->assertCount(5, $results);
+
+        /** @var \Geocoder\Location $result */
+        $result = $results->first();
+        $this->assertInstanceOf(Address::class, $result);
+        $this->assertEquals(52.16110378, $result->getCoordinates()->getLatitude(), '', 0.001);
+        $this->assertEquals(4.48623323, $result->getCoordinates()->getLongitude(), '', 0.001);
+        $this->assertNull($result->getStreetNumber());
+        $this->assertEquals('Apothekersdijk', $result->getStreetName());
+        $this->assertEquals('2312DC', $result->getPostalCode());
+        $this->assertEquals('Leiden', $result->getLocality());
+        $this->assertFalse($result->getAdminLevels()->has(2));
+        $this->assertFalse($result->getAdminLevels()->has(1));
+        $this->assertEquals('Netherlands', $result->getCountry()->getName());
+        $this->assertEquals('NL', $result->getCountry()->getCode());
+        $this->assertEquals('Europe/Amsterdam', $result->getTimezone());
+        $this->assertEquals('nationaal_georegister', $result->getProvidedBy());
+    }
+
     public function testGeocodeWithPostalCode()
     {
         $provider = new NationaalGeoregister($this->getHttpClient());
