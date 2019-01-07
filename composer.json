@@ -20,7 +20,7 @@
     "require-dev": {
         "geocoder-php/provider-integration-tests": "^1.0",
         "php-http/curl-client": "^1.7",
-        "phpunit/phpunit": "^6.0"
+        "phpunit/phpunit": "^6.0|^7.0"
     },
     "provide": {
         "geocoder-php/provider-implementation": "1.0"
