@@ -186,10 +186,10 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
             $builder->setStreetName($doc->straatnaam ?? null);
             $builder->setPostalCode($doc->postcode ?? null);
             $builder->setLocality($doc->woonplaatsnaam ?? null);
-            if ($doc->gemeentenaam) {
+            if (isset($doc->gemeentenaam)) {
                 $builder->addAdminLevel(2, $doc->gemeentenaam, $doc->gemeentecode);
             }
-            if ($doc->provincienaam) {
+            if (isset($doc->provincienaam)) {
                 $builder->addAdminLevel(1, $doc->provincienaam, $doc->provinciecode);
             }
             $builder->setCountry('Netherlands');
