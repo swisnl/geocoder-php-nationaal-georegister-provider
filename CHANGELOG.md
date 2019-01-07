@@ -8,6 +8,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Nothing
 
+## [1.2.1] - 2019-01-07
+
+### Fixed
+
+- Fixed use case where "Undefined property: stdClass::$gemeentenaam" and "Undefined property: stdClass::$provincienaam" occured [#4](https://github.com/swisnl/geocoder-php-nationaal-georegister-provider/pull/4)
+
 ## [1.2.0] - 2018-12-11
 
 ### Added
