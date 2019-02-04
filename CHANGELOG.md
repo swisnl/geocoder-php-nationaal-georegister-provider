@@ -8,6 +8,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Nothing
 
+## [1.2.2] - 2019-02-04
+
+### Fixed
+
+- Fixed use case where reverse geocoding failed for results with special characters (e.g. umlaut).
+
 ## [1.2.1] - 2019-01-07
 
 ### Fixed
