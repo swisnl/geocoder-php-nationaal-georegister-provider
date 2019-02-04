@@ -216,7 +216,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
         $result = json_decode($content);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new InvalidServerResponse(sprintf('Could not execute query "%s"', $query));
+            throw new InvalidServerResponse(sprintf('Could not execute query "%s": %s', $query, json_last_error_msg()));
         }
 
         return $result;
