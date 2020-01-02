@@ -2,14 +2,11 @@ dist: trusty
 language: php
 
 php:
-  - "7.0"
-  - "7.1"
-  - "7.2"
-  - "7.3"
-
-# This triggers builds to run on the new TravisCI infrastructure.
-# See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
-sudo: false
+  - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
+  - 7.4
 
 ## Cache composer
 cache:
@@ -17,7 +14,7 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - travis_retry composer install --no-interaction
+  - travis_retry composer update --no-interaction --prefer-dist
 
 script:
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
