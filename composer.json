@@ -12,15 +12,15 @@
     ],
     "homepage": "https://github.com/swisnl/geocoder-php-nationaal-georegister-provider",
     "require": {
-        "php": "^7.0",
+        "php": "^7.4 || ^8.0",
         "ext-json": "*",
         "geocoder-php/common-http": "^4.0",
         "willdurand/geocoder": "^4.0"
     },
     "require-dev": {
         "geocoder-php/provider-integration-tests": "^1.0",
-        "php-http/curl-client": "^1.7",
-        "phpunit/phpunit": "^6.0|^7.0"
+        "php-http/curl-client": "^2.0",
+        "phpunit/phpunit": "^9.0"
     },
     "provide": {
         "geocoder-php/provider-implementation": "1.0"

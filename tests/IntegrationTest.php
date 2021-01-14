@@ -25,12 +25,12 @@ class IntegrationTest extends ProviderIntegrationTest
         return new NationaalGeoregister($httpClient);
     }
 
-    protected function getCacheDir()
+    protected function getCacheDir() : string
     {
         return __DIR__.'/.cached_responses';
     }
 
-    protected function getApiKey()
+    protected function getApiKey() : ?string
     {
         return null;
     }
