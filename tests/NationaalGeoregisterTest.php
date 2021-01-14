@@ -36,12 +36,11 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertEquals('nationaal_georegister', $provider->getName());
     }
 
-    /**
-     * @expectedException \Geocoder\Exception\UnsupportedOperation
-     * @expectedExceptionMessage The NationaalGeoregister provider does not support IP addresses.
-     */
     public function testGeocodeWithIPAddress() : void
     {
+        $this->expectException(\Geocoder\Exception\UnsupportedOperation::class);
+        $this->expectExceptionMessage('The NationaalGeoregister provider does not support IP addresses.');
+
         $provider = new NationaalGeoregister($this->getMockedHttpClient());
         $provider->geocodeQuery(GeocodeQuery::create('8.8.8.8'));
     }
@@ -82,8 +81,8 @@ class NationaalGeoregisterTest extends BaseTestCase
         /** @var \Geocoder\Location $result */
         $result = $results->first();
         $this->assertInstanceOf(Address::class, $result);
-        $this->assertEquals(52.16416908, $result->getCoordinates()->getLatitude(), '', 0.001);
-        $this->assertEquals(4.49098397, $result->getCoordinates()->getLongitude(), '', 0.001);
+        $this->assertEqualsWithDelta(52.16416908, $result->getCoordinates()->getLatitude(), 0.001);
+        $this->assertEqualsWithDelta(4.49098397, $result->getCoordinates()->getLongitude(), 0.001);
         $this->assertNull($result->getStreetNumber());
         $this->assertEquals('3e Binnenvestgracht', $result->getStreetName());
         $this->assertEquals('2312NR', $result->getPostalCode());
@@ -196,11 +195,10 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertEquals('nationaal_georegister', $result->getProvidedBy());
     }
 
-    /**
-     * @expectedException \Geocoder\Exception\InvalidServerResponse
-     */
     public function testServerEmptyResponse() : void
     {
+        $this->expectException(\Geocoder\Exception\InvalidServerResponse::class);
+
         $provider = new NationaalGeoregister($this->getMockedHttpClient());
         $provider->geocodeQuery(GeocodeQuery::create('Lorem ipsum'));
     }
