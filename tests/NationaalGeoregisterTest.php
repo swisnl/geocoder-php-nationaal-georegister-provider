@@ -30,7 +30,7 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertEquals([], $provider->getOptions());
     }
 
-    public function testGetName()
+    public function testGetName() : void
     {
         $provider = new NationaalGeoregister($this->getMockedHttpClient());
         $this->assertEquals('nationaal_georegister', $provider->getName());
