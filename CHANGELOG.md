@@ -8,6 +8,16 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Nothing
 
+## [1.3.0] - 2021-01-18
+
+### Added
+
+- PHP 8 support [#6](https://github.com/swisnl/geocoder-php-nationaal-georegister-provider/pull/6)
+
+### Removed
+
+- PHP <7.2 support [#6](https://github.com/swisnl/geocoder-php-nationaal-georegister-provider/pull/6)
+
 ## [1.2.2] - 2019-02-04
 
 ### Fixed
