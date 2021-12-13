@@ -1,0 +1,8 @@
+s:206:"{
+  "response":{"numFound":1,"start":0,"maxScore":5.989265,"docs":[
+      {
+        "provinciecode":"PV20",
+        "provincienaam":"Groningen",
+        "centroide_ll":"POINT(6.7323664 53.25997243)"}]
+  }}
+";

@@ -195,6 +195,31 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertEquals('nationaal_georegister', $result->getProvidedBy());
     }
 
+    public function testGeocodeWithFilterQuery() : void
+    {
+        $provider = new NationaalGeoregister($this->getHttpClient());
+        $results = $provider->geocodeQuery(GeocodeQuery::create('Groningen')->withData('fq', 'type:provincie'));
+
+        $this->assertInstanceOf(AddressCollection::class, $results);
+        $this->assertCount(1, $results);
+
+        /** @var \Geocoder\Location $result */
+        $result = $results->first();
+        $this->assertInstanceOf(Address::class, $result);
+        $this->assertEquals(53.25997243, $result->getCoordinates()->getLatitude(), '', 0.001);
+        $this->assertEquals(6.7323664, $result->getCoordinates()->getLongitude(), '', 0.001);
+        $this->assertEquals(null, $result->getStreetNumber());
+        $this->assertEquals(null, $result->getStreetName());
+        $this->assertEquals(null, $result->getPostalCode());
+        $this->assertEquals(null, $result->getLocality());
+        $this->assertEquals(false, $result->getAdminLevels()->has(2));
+        $this->assertEquals('Groningen', $result->getAdminLevels()->get(1)->getName());
+        $this->assertEquals('Netherlands', $result->getCountry()->getName());
+        $this->assertEquals('NL', $result->getCountry()->getCode());
+        $this->assertEquals('Europe/Amsterdam', $result->getTimezone());
+        $this->assertEquals('nationaal_georegister', $result->getProvidedBy());
+    }
+
     public function testServerEmptyResponse() : void
     {
         $this->expectException(\Geocoder\Exception\InvalidServerResponse::class);

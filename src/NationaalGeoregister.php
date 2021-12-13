@@ -117,6 +117,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
         return array_merge(
             static::DEFAULT_OPTIONS,
             $this->options,
+            array_diff_key($query->getAllData(), array_fill_keys(self::BLACKLISTED_OPTIONS, true)),
             static::REQUIRED_OPTIONS_GEOCODE,
             [
                 'rows' => $query->getLimit(),
@@ -147,6 +148,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
         return array_merge(
             static::DEFAULT_OPTIONS,
             $this->options,
+            array_diff_key($query->getAllData(), array_fill_keys(self::BLACKLISTED_OPTIONS, true)),
             static::REQUIRED_OPTIONS_REVERSE,
             [
                 'rows' => $query->getLimit(),

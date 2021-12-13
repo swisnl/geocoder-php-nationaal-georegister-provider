@@ -6,7 +6,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
-- Nothing
+### Added
+
+- Allow setting options per query using query data.
 
 ## [1.3.0] - 2021-01-18
 
