@@ -121,7 +121,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
             static::REQUIRED_OPTIONS_GEOCODE,
             [
                 'rows' => $query->getLimit(),
-                'q'    => $query->getText(),
+                'q' => $query->getText(),
             ]
         );
     }
@@ -152,8 +152,8 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
             static::REQUIRED_OPTIONS_REVERSE,
             [
                 'rows' => $query->getLimit(),
-                'lat'  => $query->getCoordinates()->getLatitude(),
-                'lon'  => $query->getCoordinates()->getLongitude(),
+                'lat' => $query->getCoordinates()->getLatitude(),
+                'lon' => $query->getCoordinates()->getLongitude(),
             ]
         );
     }
@@ -183,7 +183,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
 
             $builder = new AddressBuilder($this->getName());
 
-            $builder->setCoordinates((float)$position[1], (float)$position[0]);
+            $builder->setCoordinates((float) $position[1], (float) $position[0]);
             $builder->setStreetNumber($doc->huis_nlt ?? $doc->huisnummer ?? null);
             $builder->setStreetName($doc->straatnaam ?? null);
             $builder->setPostalCode($doc->postcode ?? null);

@@ -15,30 +15,30 @@ use Swis\Geocoder\NationaalGeoregister\NationaalGeoregister;
 
 class NationaalGeoregisterTest extends BaseTestCase
 {
-    protected function getCacheDir() : string
+    protected function getCacheDir(): string
     {
         return __DIR__.'/.cached_responses';
     }
 
-    public function testExtraOptionsCanBeSet() : void
+    public function testExtraOptionsCanBeSet(): void
     {
         $provider = new NationaalGeoregister($this->getMockedHttpClient(), ['ident' => 'true']);
         $this->assertEquals(['ident' => 'true'], $provider->getOptions());
     }
 
-    public function testBlacklistedOptionsCanNotBeSet() : void
+    public function testBlacklistedOptionsCanNotBeSet(): void
     {
         $provider = new NationaalGeoregister($this->getMockedHttpClient(), ['fl' => '*']);
         $this->assertEquals([], $provider->getOptions());
     }
 
-    public function testGetName() : void
+    public function testGetName(): void
     {
         $provider = new NationaalGeoregister($this->getMockedHttpClient());
         $this->assertEquals('nationaal_georegister', $provider->getName());
     }
 
-    public function testGeocodeWithIPAddress() : void
+    public function testGeocodeWithIPAddress(): void
     {
         $this->expectException(UnsupportedOperation::class);
         $this->expectExceptionMessage('The NationaalGeoregister provider does not support IP addresses.');
@@ -47,7 +47,7 @@ class NationaalGeoregisterTest extends BaseTestCase
         $provider->geocodeQuery(GeocodeQuery::create('8.8.8.8'));
     }
 
-    public function testGeocodeWithShortPostalCode() : void
+    public function testGeocodeWithShortPostalCode(): void
     {
         $provider = new NationaalGeoregister($this->getHttpClient());
         $results = $provider->geocodeQuery(GeocodeQuery::create('2312'));
@@ -71,7 +71,7 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertEquals('nationaal_georegister', $result->getProvidedBy());
     }
 
-    public function testGeocodeWithPostalCode() : void
+    public function testGeocodeWithPostalCode(): void
     {
         $provider = new NationaalGeoregister($this->getHttpClient());
         $results = $provider->geocodeQuery(GeocodeQuery::create('2312 NR'));
@@ -95,7 +95,7 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertEquals('nationaal_georegister', $result->getProvidedBy());
     }
 
-    public function testGeocodeWithPostalCodeAndStreetNumber() : void
+    public function testGeocodeWithPostalCodeAndStreetNumber(): void
     {
         $provider = new NationaalGeoregister($this->getHttpClient());
         $results = $provider->geocodeQuery(GeocodeQuery::create('2312 NR, 23'));
@@ -119,7 +119,7 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertEquals('nationaal_georegister', $result->getProvidedBy());
     }
 
-    public function testGeocodeWithStreetNameAndStreetNumber() : void
+    public function testGeocodeWithStreetNameAndStreetNumber(): void
     {
         $provider = new NationaalGeoregister($this->getHttpClient());
         $results = $provider->geocodeQuery(GeocodeQuery::create('3e Binnenvestgracht 23'));
@@ -143,7 +143,7 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertEquals('nationaal_georegister', $result->getProvidedBy());
     }
 
-    public function testGeocodeWithStreetNameStreetNumberAndCity() : void
+    public function testGeocodeWithStreetNameStreetNumberAndCity(): void
     {
         $provider = new NationaalGeoregister($this->getHttpClient());
         $results = $provider->geocodeQuery(GeocodeQuery::create('3e Binnenvestgracht 23, Leiden'));
@@ -167,7 +167,7 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertEquals('nationaal_georegister', $result->getProvidedBy());
     }
 
-    public function testReverse() : void
+    public function testReverse(): void
     {
         $provider = new NationaalGeoregister($this->getHttpClient());
         $results = $provider->reverseQuery(ReverseQuery::fromCoordinates(52.16416908, 4.49098397));
@@ -191,7 +191,7 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertEquals('nationaal_georegister', $result->getProvidedBy());
     }
 
-    public function testGeocodeWithFilterQuery() : void
+    public function testGeocodeWithFilterQuery(): void
     {
         $provider = new NationaalGeoregister($this->getHttpClient());
         $results = $provider->geocodeQuery(GeocodeQuery::create('Groningen')->withData('fq', 'type:provincie'));
@@ -215,7 +215,7 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertEquals('nationaal_georegister', $result->getProvidedBy());
     }
 
-    public function testServerEmptyResponse() : void
+    public function testServerEmptyResponse(): void
     {
         $this->expectException(InvalidServerResponse::class);
 
