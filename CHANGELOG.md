@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Allow setting options per query using query data.
 
+### Fixed
+
+- Added (protected) visibility keyword to constants. Although this can be considered a breaking change, we consider it a bugfix as they were never meant to be public.
+
 ### Removed
 
 - PHP <7.3 support

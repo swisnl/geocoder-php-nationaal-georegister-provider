@@ -20,17 +20,17 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
     /**
      * @var string
      */
-    const ENDPOINT_URL_FREE = 'https://geodata.nationaalgeoregister.nl/locatieserver/v3/free?%s';
+    protected const ENDPOINT_URL_FREE = 'https://geodata.nationaalgeoregister.nl/locatieserver/v3/free?%s';
 
     /**
      * @var string
      */
-    const ENDPOINT_URL_REVERSE = 'https://geodata.nationaalgeoregister.nl/locatieserver/revgeo?%s';
+    protected const ENDPOINT_URL_REVERSE = 'https://geodata.nationaalgeoregister.nl/locatieserver/revgeo?%s';
 
     /**
      * @var string[]
      */
-    const BLACKLISTED_OPTIONS = [
+    protected const BLACKLISTED_OPTIONS = [
         'fl',
         'rows',
         'type',
@@ -40,7 +40,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
     /**
      * @var array
      */
-    const DEFAULT_OPTIONS = [
+    protected const DEFAULT_OPTIONS = [
         'bq' => 'type:gemeente^0.5 type:woonplaats^0.5 type:weg^1.0 type:postcode^1.5 type:adres^1.5',
         'fl' => 'centroide_ll,huis_nlt,huisnummer,straatnaam,postcode,woonplaatsnaam,gemeentenaam,gemeentecode,provincienaam,provinciecode',
     ];
@@ -48,12 +48,12 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
     /**
      * @var array
      */
-    const REQUIRED_OPTIONS_GEOCODE = [];
+    protected const REQUIRED_OPTIONS_GEOCODE = [];
 
     /**
      * @var array
      */
-    const REQUIRED_OPTIONS_REVERSE = [
+    protected const REQUIRED_OPTIONS_REVERSE = [
         'type' => 'adres',
     ];
 
