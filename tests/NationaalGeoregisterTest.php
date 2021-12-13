@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Swis\Geocoder\NationaalGeoregister\Tests;
 
+use Geocoder\Exception\InvalidServerResponse;
+use Geocoder\Exception\UnsupportedOperation;
 use Geocoder\IntegrationTest\BaseTestCase;
 use Geocoder\Model\Address;
 use Geocoder\Model\AddressCollection;
@@ -38,7 +40,7 @@ class NationaalGeoregisterTest extends BaseTestCase
 
     public function testGeocodeWithIPAddress() : void
     {
-        $this->expectException(\Geocoder\Exception\UnsupportedOperation::class);
+        $this->expectException(UnsupportedOperation::class);
         $this->expectExceptionMessage('The NationaalGeoregister provider does not support IP addresses.');
 
         $provider = new NationaalGeoregister($this->getMockedHttpClient());
@@ -53,11 +55,10 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertInstanceOf(AddressCollection::class, $results);
         $this->assertCount(5, $results);
 
-        /** @var \Geocoder\Location $result */
         $result = $results->first();
         $this->assertInstanceOf(Address::class, $result);
-        $this->assertEquals(52.16110378, $result->getCoordinates()->getLatitude(), '', 0.001);
-        $this->assertEquals(4.48623323, $result->getCoordinates()->getLongitude(), '', 0.001);
+        $this->assertEqualsWithDelta(52.16110378, $result->getCoordinates()->getLatitude(), 0.001);
+        $this->assertEqualsWithDelta(4.48623323, $result->getCoordinates()->getLongitude(), 0.001);
         $this->assertNull($result->getStreetNumber());
         $this->assertEquals('Apothekersdijk', $result->getStreetName());
         $this->assertEquals('2312DC', $result->getPostalCode());
@@ -78,7 +79,6 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertInstanceOf(AddressCollection::class, $results);
         $this->assertCount(5, $results);
 
-        /** @var \Geocoder\Location $result */
         $result = $results->first();
         $this->assertInstanceOf(Address::class, $result);
         $this->assertEqualsWithDelta(52.16416908, $result->getCoordinates()->getLatitude(), 0.001);
@@ -103,11 +103,10 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertInstanceOf(AddressCollection::class, $results);
         $this->assertCount(5, $results);
 
-        /** @var \Geocoder\Location $result */
         $result = $results->first();
         $this->assertInstanceOf(Address::class, $result);
-        $this->assertEquals(52.16416908, $result->getCoordinates()->getLatitude(), '', 0.001);
-        $this->assertEquals(4.49098397, $result->getCoordinates()->getLongitude(), '', 0.001);
+        $this->assertEqualsWithDelta(52.16416908, $result->getCoordinates()->getLatitude(), 0.001);
+        $this->assertEqualsWithDelta(4.49098397, $result->getCoordinates()->getLongitude(), 0.001);
         $this->assertEquals('23A', $result->getStreetNumber());
         $this->assertEquals('3e Binnenvestgracht', $result->getStreetName());
         $this->assertEquals('2312NR', $result->getPostalCode());
@@ -128,11 +127,10 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertInstanceOf(AddressCollection::class, $results);
         $this->assertCount(5, $results);
 
-        /** @var \Geocoder\Location $result */
         $result = $results->first();
         $this->assertInstanceOf(Address::class, $result);
-        $this->assertEquals(52.16416908, $result->getCoordinates()->getLatitude(), '', 0.001);
-        $this->assertEquals(4.49098397, $result->getCoordinates()->getLongitude(), '', 0.001);
+        $this->assertEqualsWithDelta(52.16416908, $result->getCoordinates()->getLatitude(), 0.001);
+        $this->assertEqualsWithDelta(4.49098397, $result->getCoordinates()->getLongitude(), 0.001);
         $this->assertEquals('23A', $result->getStreetNumber());
         $this->assertEquals('3e Binnenvestgracht', $result->getStreetName());
         $this->assertEquals('2312NR', $result->getPostalCode());
@@ -153,11 +151,10 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertInstanceOf(AddressCollection::class, $results);
         $this->assertCount(5, $results);
 
-        /** @var \Geocoder\Location $result */
         $result = $results->first();
         $this->assertInstanceOf(Address::class, $result);
-        $this->assertEquals(52.16416908, $result->getCoordinates()->getLatitude(), '', 0.001);
-        $this->assertEquals(4.49098397, $result->getCoordinates()->getLongitude(), '', 0.001);
+        $this->assertEqualsWithDelta(52.16416908, $result->getCoordinates()->getLatitude(), 0.001);
+        $this->assertEqualsWithDelta(4.49098397, $result->getCoordinates()->getLongitude(), 0.001);
         $this->assertEquals('23A', $result->getStreetNumber());
         $this->assertEquals('3e Binnenvestgracht', $result->getStreetName());
         $this->assertEquals('2312NR', $result->getPostalCode());
@@ -178,11 +175,10 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertInstanceOf(AddressCollection::class, $results);
         $this->assertCount(5, $results);
 
-        /** @var \Geocoder\Location $result */
         $result = $results->first();
         $this->assertInstanceOf(Address::class, $result);
-        $this->assertEquals(52.16416908, $result->getCoordinates()->getLatitude(), '', 0.001);
-        $this->assertEquals(4.49098397, $result->getCoordinates()->getLongitude(), '', 0.001);
+        $this->assertEqualsWithDelta(52.16416908, $result->getCoordinates()->getLatitude(), 0.001);
+        $this->assertEqualsWithDelta(4.49098397, $result->getCoordinates()->getLongitude(), 0.001);
         $this->assertEquals('23A', $result->getStreetNumber());
         $this->assertEquals('3e Binnenvestgracht', $result->getStreetName());
         $this->assertEquals('2312NR', $result->getPostalCode());
@@ -203,11 +199,10 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertInstanceOf(AddressCollection::class, $results);
         $this->assertCount(1, $results);
 
-        /** @var \Geocoder\Location $result */
         $result = $results->first();
         $this->assertInstanceOf(Address::class, $result);
-        $this->assertEquals(53.25997243, $result->getCoordinates()->getLatitude(), '', 0.001);
-        $this->assertEquals(6.7323664, $result->getCoordinates()->getLongitude(), '', 0.001);
+        $this->assertEqualsWithDelta(53.25997243, $result->getCoordinates()->getLatitude(), 0.001);
+        $this->assertEqualsWithDelta(6.7323664, $result->getCoordinates()->getLongitude(), 0.001);
         $this->assertEquals(null, $result->getStreetNumber());
         $this->assertEquals(null, $result->getStreetName());
         $this->assertEquals(null, $result->getPostalCode());
@@ -222,7 +217,7 @@ class NationaalGeoregisterTest extends BaseTestCase
 
     public function testServerEmptyResponse() : void
     {
-        $this->expectException(\Geocoder\Exception\InvalidServerResponse::class);
+        $this->expectException(InvalidServerResponse::class);
 
         $provider = new NationaalGeoregister($this->getMockedHttpClient());
         $provider->geocodeQuery(GeocodeQuery::create('Lorem ipsum'));
