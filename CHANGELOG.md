@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Allow setting options per query using query data.
 
+### Removed
+
+- PHP <7.3 support
+
 ## [1.3.0] - 2021-01-18
 
 ### Added
