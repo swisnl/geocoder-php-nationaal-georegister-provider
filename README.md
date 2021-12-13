@@ -49,8 +49,7 @@ Please see [PHP Geocoder documentation](http://geocoder-php.org/Geocoder/) for m
 
 ### Options
 
-This provider accepts extra options as the second argument.
-These options are directly passed to the Locatieserver, which accepts the following options:
+This provider accepts extra options in the constructor, or as query data. These options are directly passed to the Locatieserver, which accepts the following options:
 
 | Option  | Description            | Default | Customizable in this provider |
 | ------- | ---------------------- | ------- | ----------------------------- |
@@ -70,9 +69,13 @@ These options correspond with the options mentioned in the [Locatieserver docume
 Example using extra options:
 
 ``` php
+// On the geocoder instance:
 $client = new \Http\Client\Curl\Client();
 $options = ['fq' => 'bron:BAG'];
 $geocoder = new \Swis\Geocoder\NationaalGeoregister\NationaalGeoregister($client, $options);
+
+// Or just once on the query:
+$query = \Geocoder\Query\GeocodeQuery::create(...)->withData('fq', 'bron:BAG');
 ```
 
 ### Response
