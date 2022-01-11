@@ -8,7 +8,7 @@
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/swisnl/geocoder-php-nationaal-georegister-provider.svg?style=flat-square)](https://scrutinizer-ci.com/g/swisnl/geocoder-php-nationaal-georegister-provider/code-structure)
 [![Quality Score](https://img.shields.io/scrutinizer/g/swisnl/geocoder-php-nationaal-georegister-provider.svg?style=flat-square)](https://scrutinizer-ci.com/g/swisnl/geocoder-php-nationaal-georegister-provider)
 [![Total Downloads](https://img.shields.io/packagist/dt/swisnl/geocoder-php-nationaal-georegister-provider.svg?style=flat-square)](https://packagist.org/packages/swisnl/geocoder-php-nationaal-georegister-provider)
-[![Made by SWIS](https://img.shields.io/badge/%F0%9F%9A%80-made%20by%20SWIS-%23D9021B.svg?style=flat-square)](https://www.swis.nl)
+[![Made by SWIS](https://img.shields.io/badge/%F0%9F%9A%80-made%20by%20SWIS-%230737A9.svg?style=flat-square)](https://www.swis.nl)
 
 This is the [Nationaal Georegister](https://geodata.nationaalgeoregister.nl/) provider for the [PHP Geocoder](https://github.com/geocoder-php/Geocoder), which uses the [PDOK Locatieserver v3 (Dutch)](https://www.pdok.nl/diensten#PDOK%20Locatieserver).
 It can geocode addresses (not IP addresses) and reverse geocode coordinates.
