@@ -13,7 +13,7 @@ use Geocoder\Model\AddressCollection;
 use Geocoder\Provider\Provider;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\Query\ReverseQuery;
-use Http\Client\HttpClient;
+use Psr\Http\Client\ClientInterface;
 
 class NationaalGeoregister extends AbstractHttpProvider implements Provider
 {
@@ -63,10 +63,10 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
     protected $options = [];
 
     /**
-     * @param \Http\Client\HttpClient $client  An HTTP adapter
-     * @param array                   $options Extra query parameters (optional)
+     * @param ClientInterface $client  An HTTP adapter
+     * @param array           $options Extra query parameters (optional)
      */
-    public function __construct(HttpClient $client, array $options = [])
+    public function __construct(ClientInterface $client, array $options = [])
     {
         parent::__construct($client);
 

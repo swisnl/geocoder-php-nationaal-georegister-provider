@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Swis\Geocoder\NationaalGeoregister\Tests;
 
 use Geocoder\IntegrationTest\ProviderIntegrationTest;
-use Http\Client\HttpClient;
+use Psr\Http\Client\ClientInterface;
 use Swis\Geocoder\NationaalGeoregister\NationaalGeoregister;
 
 class IntegrationTest extends ProviderIntegrationTest
@@ -20,7 +20,7 @@ class IntegrationTest extends ProviderIntegrationTest
 
     protected $testIpv6 = false;
 
-    protected function createProvider(HttpClient $httpClient)
+    protected function createProvider(ClientInterface $httpClient)
     {
         return new NationaalGeoregister($httpClient);
     }
