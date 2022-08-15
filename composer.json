@@ -14,12 +14,12 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-json": "*",
-        "geocoder-php/common-http": "^4.0",
-        "willdurand/geocoder": "^4.0"
+        "geocoder-php/common-http": "^4.5",
+        "willdurand/geocoder": "^4.6"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.4",
-        "geocoder-php/provider-integration-tests": "^1.5",
+        "friendsofphp/php-cs-fixer": "^3.9",
+        "geocoder-php/provider-integration-tests": "^1.6",
         "php-http/curl-client": "^2.0",
         "phpunit/phpunit": "^9.0"
     },

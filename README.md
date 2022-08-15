@@ -25,19 +25,19 @@ $ composer require swisnl/geocoder-php-nationaal-georegister-provider
 
 ### HTTP Client
 
-PHP Geocoder is decoupled from any HTTP messaging client with the help of [PHP-HTTP](http://php-http.org/).
-This requires another package providing [php-http/client-implementation](https://packagist.org/providers/php-http/client-implementation).
-To use Guzzle 6, for example, simply require `php-http/guzzle6-adapter`:
+PHP Geocoder is decoupled from any HTTP messaging client with the help of [PSR-18 HTTP Client](https://www.php-fig.org/psr/psr-18/).
+This requires another package providing [psr/http-client-implementation](https://packagist.org/providers/psr/http-client-implementation).
+To use Guzzle 7, for example, simply require `guzzlehttp/guzzle`:
 
 ``` bash
-$ composer require php-http/guzzle6-adapter
+$ composer require guzzlehttp/guzzle
 ```
 
 ## Usage
 
 ``` php
 // Create geocoder
-$client = new \Http\Client\Curl\Client();
+$client = new \GuzzleHttp\Client();
 $geocoder = new \Swis\Geocoder\NationaalGeoregister\NationaalGeoregister($client);
 
 // Geocode!
@@ -70,7 +70,7 @@ Example using extra options:
 
 ``` php
 // On the geocoder instance:
-$client = new \Http\Client\Curl\Client();
+$client = new \GuzzleHttp\Client();
 $options = ['fq' => 'bron:BAG'];
 $geocoder = new \Swis\Geocoder\NationaalGeoregister\NationaalGeoregister($client, $options);
 
