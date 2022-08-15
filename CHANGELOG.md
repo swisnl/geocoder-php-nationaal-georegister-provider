@@ -6,7 +6,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
-- Nothing
+### Removed
+
+- PHP <7.4 support
 
 ## [1.4.0] - 2021-12-13
 
