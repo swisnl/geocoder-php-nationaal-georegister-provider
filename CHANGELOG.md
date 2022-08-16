@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
+- Nothing.
+
+## [1.5.0] - 2022-08-16
+
 ### Changed
 
 - Expect a PSR-18 client instead of a PHP-HTTP client. N.B. PHP-HTTP clients implement this interface, so it should not be a breaking change.
