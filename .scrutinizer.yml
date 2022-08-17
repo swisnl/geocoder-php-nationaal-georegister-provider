@@ -21,3 +21,10 @@ tools:
   external_code_coverage:
     timeout: 600
     runs: 6
+
+build:
+  nodes:
+    analysis:
+      tests:
+        override:
+          - php-scrutinizer-run
