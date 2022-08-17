@@ -4,7 +4,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/swisnl/geocoder-php-nationaal-georegister-provider.svg?style=flat-square)](https://packagist.org/packages/swisnl/geocoder-php-nationaal-georegister-provider)
 [![Software License](https://img.shields.io/packagist/l/swisnl/geocoder-php-nationaal-georegister-provider.svg?style=flat-square)](LICENSE.md) 
 [![Buy us a tree](https://img.shields.io/badge/Treeware-%F0%9F%8C%B3-lightgreen.svg?style=flat-square)](https://plant.treeware.earth/swisnl/geocoder-php-nationaal-georegister-provider)
-[![Build Status](https://img.shields.io/travis/swisnl/geocoder-php-nationaal-georegister-provider/master.svg?style=flat-square)](https://travis-ci.org/swisnl/geocoder-php-nationaal-georegister-provider)
+[![Build Status](https://img.shields.io/github/checks-status/swisnl/geocoder-php-nationaal-georegister-provider/master?label=tests)](https://github.com/swisnl/geocoder-php-nationaal-georegister-provider/actions/workflows/tests.yml)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/swisnl/geocoder-php-nationaal-georegister-provider.svg?style=flat-square)](https://scrutinizer-ci.com/g/swisnl/geocoder-php-nationaal-georegister-provider/code-structure)
 [![Quality Score](https://img.shields.io/scrutinizer/g/swisnl/geocoder-php-nationaal-georegister-provider.svg?style=flat-square)](https://scrutinizer-ci.com/g/swisnl/geocoder-php-nationaal-georegister-provider)
 [![Total Downloads](https://img.shields.io/packagist/dt/swisnl/geocoder-php-nationaal-georegister-provider.svg?style=flat-square)](https://packagist.org/packages/swisnl/geocoder-php-nationaal-georegister-provider)
