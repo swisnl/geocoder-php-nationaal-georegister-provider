@@ -20,12 +20,12 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
     /**
      * @var string
      */
-    protected const ENDPOINT_URL_FREE = 'https://geodata.nationaalgeoregister.nl/locatieserver/v3/free?%s';
+    protected const ENDPOINT_URL_FREE = 'https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?%s';
 
     /**
      * @var string
      */
-    protected const ENDPOINT_URL_REVERSE = 'https://geodata.nationaalgeoregister.nl/locatieserver/revgeo?%s';
+    protected const ENDPOINT_URL_REVERSE = 'https://api.pdok.nl/bzk/locatieserver/search/v3_1/reverse?%s';
 
     /**
      * @var string[]
@@ -41,14 +41,25 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
      * @var array
      */
     protected const DEFAULT_OPTIONS = [
-        'bq' => 'type:gemeente^0.5 type:woonplaats^0.5 type:weg^1.0 type:postcode^1.5 type:adres^1.5',
         'fl' => 'centroide_ll,huis_nlt,huisnummer,straatnaam,postcode,woonplaatsnaam,gemeentenaam,gemeentecode,provincienaam,provinciecode',
     ];
 
     /**
      * @var array
      */
+    protected const DEFAULT_OPTIONS_GEOCODE = [
+        'bq' => 'type:gemeente^0.5 type:woonplaats^0.5 type:weg^1.0 type:postcode^1.5 type:adres^1.5',
+    ];
+
+    /**
+     * @var array
+     */
     protected const REQUIRED_OPTIONS_GEOCODE = [];
+
+    /**
+     * @var array
+     */
+    protected const DEFAULT_OPTIONS_REVERSE = [];
 
     /**
      * @var array
@@ -116,6 +127,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
     {
         return array_merge(
             static::DEFAULT_OPTIONS,
+            static::DEFAULT_OPTIONS_GEOCODE,
             $this->options,
             array_diff_key($query->getAllData(), array_fill_keys(self::BLACKLISTED_OPTIONS, true)),
             static::REQUIRED_OPTIONS_GEOCODE,
@@ -147,6 +159,7 @@ class NationaalGeoregister extends AbstractHttpProvider implements Provider
     {
         return array_merge(
             static::DEFAULT_OPTIONS,
+            static::DEFAULT_OPTIONS_REVERSE,
             $this->options,
             array_diff_key($query->getAllData(), array_fill_keys(self::BLACKLISTED_OPTIONS, true)),
             static::REQUIRED_OPTIONS_REVERSE,

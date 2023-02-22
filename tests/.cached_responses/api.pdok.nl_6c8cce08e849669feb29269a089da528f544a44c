@@ -1,0 +1,57 @@
+s:1847:"{
+  "response":{"numFound":27830,"start":0,"maxScore":10.262476,"numFoundExact":true,"docs":[
+      {
+        "woonplaatsnaam":"Leiden",
+        "gemeentecode":"0546",
+        "gemeentenaam":"Leiden",
+        "provinciecode":"PV28",
+        "postcode":"2312NR",
+        "provincienaam":"Zuid-Holland",
+        "centroide_ll":"POINT(4.49097335 52.16412522)",
+        "straatnaam":"3e Binnenvestgracht"},
+      {
+        "woonplaatsnaam":"Leiden",
+        "huis_nlt":"23L-1",
+        "gemeentecode":"0546",
+        "gemeentenaam":"Leiden",
+        "provinciecode":"PV28",
+        "postcode":"2312NR",
+        "provincienaam":"Zuid-Holland",
+        "centroide_ll":"POINT(4.49157312 52.16420333)",
+        "huisnummer":23,
+        "straatnaam":"3e Binnenvestgracht"},
+      {
+        "woonplaatsnaam":"Leiden",
+        "huis_nlt":"23L-2",
+        "gemeentecode":"0546",
+        "gemeentenaam":"Leiden",
+        "provinciecode":"PV28",
+        "postcode":"2312NR",
+        "provincienaam":"Zuid-Holland",
+        "centroide_ll":"POINT(4.49157 52.16425474)",
+        "huisnummer":23,
+        "straatnaam":"3e Binnenvestgracht"},
+      {
+        "woonplaatsnaam":"Leiden",
+        "huis_nlt":"23T-1",
+        "gemeentecode":"0546",
+        "gemeentenaam":"Leiden",
+        "provinciecode":"PV28",
+        "postcode":"2312NR",
+        "provincienaam":"Zuid-Holland",
+        "centroide_ll":"POINT(4.49202289 52.164203)",
+        "huisnummer":23,
+        "straatnaam":"3e Binnenvestgracht"},
+      {
+        "woonplaatsnaam":"Leiden",
+        "huis_nlt":"3A",
+        "gemeentecode":"0546",
+        "gemeentenaam":"Leiden",
+        "provinciecode":"PV28",
+        "postcode":"2312NR",
+        "provincienaam":"Zuid-Holland",
+        "centroide_ll":"POINT(4.49018186 52.16417634)",
+        "huisnummer":3,
+        "straatnaam":"3e Binnenvestgracht"}]
+  }}
+";

@@ -1,0 +1,62 @@
+s:1854:"{
+  "response" : {
+    "numFound" : 5,
+    "start" : 0,
+    "maxScore" : 7.280073,
+    "numFoundExact" : true,
+    "docs" : [ {
+      "woonplaatsnaam" : "Oosterwolde Gld",
+      "huis_nlt" : "9",
+      "gemeentecode" : "0269",
+      "gemeentenaam" : "Oldebroek",
+      "provinciecode" : "PV25",
+      "postcode" : "8097SL",
+      "provincienaam" : "Gelderland",
+      "centroide_ll" : "POINT(3.31355763 47.97476588)",
+      "huisnummer" : 9,
+      "straatnaam" : "Hof ter Eekterweg"
+    }, {
+      "woonplaatsnaam" : "Eijsden",
+      "huis_nlt" : "1",
+      "gemeentecode" : "1903",
+      "gemeentenaam" : "Eijsden-Margraten",
+      "provinciecode" : "PV31",
+      "provincienaam" : "Limburg",
+      "centroide_ll" : "POINT(5.68361635 50.75822148)",
+      "huisnummer" : 1,
+      "straatnaam" : "Navagne"
+    }, {
+      "woonplaatsnaam" : "Eijsden",
+      "huis_nlt" : "2",
+      "gemeentecode" : "1903",
+      "gemeentenaam" : "Eijsden-Margraten",
+      "provinciecode" : "PV31",
+      "postcode" : "6245SM",
+      "provincienaam" : "Limburg",
+      "centroide_ll" : "POINT(5.69270798 50.75942025)",
+      "huisnummer" : 2,
+      "straatnaam" : "Schansweg"
+    }, {
+      "woonplaatsnaam" : "Eijsden",
+      "huis_nlt" : "4",
+      "gemeentecode" : "1903",
+      "gemeentenaam" : "Eijsden-Margraten",
+      "provinciecode" : "PV31",
+      "postcode" : "6245SM",
+      "provincienaam" : "Limburg",
+      "centroide_ll" : "POINT(5.69285188 50.75975245)",
+      "huisnummer" : 4,
+      "straatnaam" : "Schansweg"
+    }, {
+      "woonplaatsnaam" : "Eijsden",
+      "huis_nlt" : "1",
+      "gemeentecode" : "1903",
+      "gemeentenaam" : "Eijsden-Margraten",
+      "provinciecode" : "PV31",
+      "provincienaam" : "Limburg",
+      "centroide_ll" : "POINT(5.7041769 50.76121532)",
+      "huisnummer" : 1,
+      "straatnaam" : "Beeldjesweg-Zuid"
+    } ]
+  }
+}";
