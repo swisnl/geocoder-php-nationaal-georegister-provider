@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
+- Nothing.
+
+## [1.6.0] - 2023-04-07
+
 ### Changed
 
 - Migrated to the new service URL. [#8](https://github.com/swisnl/geocoder-php-nationaal-georegister-provider/pull/8)
