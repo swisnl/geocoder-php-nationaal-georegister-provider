@@ -1,0 +1,49 @@
+s:1607:"{
+  "response":{"numFound":10127,"start":0,"maxScore":6.436285,"numFoundExact":true,"docs":[
+      {
+        "woonplaatsnaam":"Leiden",
+        "gemeentecode":"0546",
+        "gemeentenaam":"Leiden",
+        "provinciecode":"PV28",
+        "postcode":"2312DC",
+        "provincienaam":"Zuid-Holland",
+        "centroide_ll":"POINT(4.48629346 52.16111501)",
+        "straatnaam":"Apothekersdijk"},
+      {
+        "woonplaatsnaam":"Leiden",
+        "gemeentecode":"0546",
+        "gemeentenaam":"Leiden",
+        "provinciecode":"PV28",
+        "postcode":"2312DD",
+        "provincienaam":"Zuid-Holland",
+        "centroide_ll":"POINT(4.48789682 52.16074794)",
+        "straatnaam":"Apothekersdijk"},
+      {
+        "woonplaatsnaam":"Leiden",
+        "gemeentecode":"0546",
+        "gemeentenaam":"Leiden",
+        "provinciecode":"PV28",
+        "postcode":"2312PL",
+        "provincienaam":"Zuid-Holland",
+        "centroide_ll":"POINT(4.49578919 52.16260075)",
+        "straatnaam":"Baatstraat"},
+      {
+        "woonplaatsnaam":"Leiden",
+        "gemeentecode":"0546",
+        "gemeentenaam":"Leiden",
+        "provinciecode":"PV28",
+        "postcode":"2312NC",
+        "provincienaam":"Zuid-Holland",
+        "centroide_ll":"POINT(4.48548541 52.16590617)",
+        "straatnaam":"Ballonpad"},
+      {
+        "woonplaatsnaam":"Leiden",
+        "gemeentecode":"0546",
+        "gemeentenaam":"Leiden",
+        "provinciecode":"PV28",
+        "postcode":"2312LJ",
+        "provincienaam":"Zuid-Holland",
+        "centroide_ll":"POINT(4.48434687 52.16566301)",
+        "straatnaam":"Ballonstraat"}]
+  }}
+";

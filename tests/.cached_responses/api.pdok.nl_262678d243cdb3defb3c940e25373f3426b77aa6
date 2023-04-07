@@ -1,0 +1,64 @@
+s:1865:"{
+  "response" : {
+    "numFound" : 5,
+    "start" : 0,
+    "maxScore" : 7.280073,
+    "numFoundExact" : true,
+    "docs" : [ {
+      "woonplaatsnaam" : "Westkapelle",
+      "huis_nlt" : "5",
+      "gemeentecode" : "0717",
+      "gemeentenaam" : "Veere",
+      "provinciecode" : "PV29",
+      "postcode" : "4361SJ",
+      "provincienaam" : "Zeeland",
+      "centroide_ll" : "POINT(3.43688184 51.54008715)",
+      "huisnummer" : 5,
+      "straatnaam" : "Zeedijk"
+    }, {
+      "woonplaatsnaam" : "Westkapelle",
+      "huis_nlt" : "7",
+      "gemeentecode" : "0717",
+      "gemeentenaam" : "Veere",
+      "provinciecode" : "PV29",
+      "postcode" : "4361SJ",
+      "provincienaam" : "Zeeland",
+      "centroide_ll" : "POINT(3.43580425 51.53563667)",
+      "huisnummer" : 7,
+      "straatnaam" : "Zeedijk"
+    }, {
+      "woonplaatsnaam" : "Westkapelle",
+      "huis_nlt" : "14",
+      "gemeentecode" : "0717",
+      "gemeentenaam" : "Veere",
+      "provinciecode" : "PV29",
+      "postcode" : "4361ST",
+      "provincienaam" : "Zeeland",
+      "centroide_ll" : "POINT(3.43758911 51.53625566)",
+      "huisnummer" : 14,
+      "straatnaam" : "Vroonwegeling"
+    }, {
+      "woonplaatsnaam" : "Westkapelle",
+      "huis_nlt" : "9B",
+      "gemeentecode" : "0717",
+      "gemeentenaam" : "Veere",
+      "provinciecode" : "PV29",
+      "postcode" : "4361SP",
+      "provincienaam" : "Zeeland",
+      "centroide_ll" : "POINT(3.43744302 51.53566981)",
+      "huisnummer" : 9,
+      "straatnaam" : "Achillesweg"
+    }, {
+      "woonplaatsnaam" : "Westkapelle",
+      "huis_nlt" : "9A",
+      "gemeentecode" : "0717",
+      "gemeentenaam" : "Veere",
+      "provinciecode" : "PV29",
+      "postcode" : "4361SP",
+      "provincienaam" : "Zeeland",
+      "centroide_ll" : "POINT(3.43740067 51.53555663)",
+      "huisnummer" : 9,
+      "straatnaam" : "Achillesweg"
+    } ]
+  }
+}";

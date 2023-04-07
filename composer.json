@@ -1,6 +1,6 @@
 {
     "name": "swisnl/geocoder-php-nationaal-georegister-provider",
-    "description": "Nationaal Georegister provider for Geocoder PHP",
+    "description": "PDOK (formerly Nationaal Georegister) provider for Geocoder PHP",
     "type": "library",
     "keywords": [
         "swisnl",

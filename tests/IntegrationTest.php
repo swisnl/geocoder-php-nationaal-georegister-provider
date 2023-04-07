@@ -12,9 +12,8 @@ class IntegrationTest extends ProviderIntegrationTest
 {
     protected $skippedTests = [
         'testGeocodeQuery' => 'Geocoding an address in the UK is not supported by this provider',
+        'testReverseQueryWithNoResults' => 'This provider will always return a result',
     ];
-
-    protected $testReverse = false;
 
     protected $testIpv4 = false;
 

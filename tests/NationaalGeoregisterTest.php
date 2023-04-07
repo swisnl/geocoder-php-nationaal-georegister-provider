@@ -63,8 +63,8 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertEquals('Apothekersdijk', $result->getStreetName());
         $this->assertEquals('2312DC', $result->getPostalCode());
         $this->assertEquals('Leiden', $result->getLocality());
-        $this->assertFalse($result->getAdminLevels()->has(2));
-        $this->assertFalse($result->getAdminLevels()->has(1));
+        $this->assertEquals('Leiden', $result->getAdminLevels()->get(2)->getName());
+        $this->assertEquals('Zuid-Holland', $result->getAdminLevels()->get(1)->getName());
         $this->assertEquals('Netherlands', $result->getCountry()->getName());
         $this->assertEquals('NL', $result->getCountry()->getCode());
         $this->assertEquals('Europe/Amsterdam', $result->getTimezone());
@@ -107,7 +107,7 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertInstanceOf(Address::class, $result);
         $this->assertEqualsWithDelta(52.16416908, $result->getCoordinates()->getLatitude(), 0.001);
         $this->assertEqualsWithDelta(4.49098397, $result->getCoordinates()->getLongitude(), 0.001);
-        $this->assertEquals('23A', $result->getStreetNumber());
+        $this->assertEquals('23L-1', $result->getStreetNumber());
         $this->assertEquals('3e Binnenvestgracht', $result->getStreetName());
         $this->assertEquals('2312NR', $result->getPostalCode());
         $this->assertEquals('Leiden', $result->getLocality());
@@ -131,7 +131,7 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertInstanceOf(Address::class, $result);
         $this->assertEqualsWithDelta(52.16416908, $result->getCoordinates()->getLatitude(), 0.001);
         $this->assertEqualsWithDelta(4.49098397, $result->getCoordinates()->getLongitude(), 0.001);
-        $this->assertEquals('23A', $result->getStreetNumber());
+        $this->assertEquals('23L-1', $result->getStreetNumber());
         $this->assertEquals('3e Binnenvestgracht', $result->getStreetName());
         $this->assertEquals('2312NR', $result->getPostalCode());
         $this->assertEquals('Leiden', $result->getLocality());
@@ -155,7 +155,7 @@ class NationaalGeoregisterTest extends BaseTestCase
         $this->assertInstanceOf(Address::class, $result);
         $this->assertEqualsWithDelta(52.16416908, $result->getCoordinates()->getLatitude(), 0.001);
         $this->assertEqualsWithDelta(4.49098397, $result->getCoordinates()->getLongitude(), 0.001);
-        $this->assertEquals('23A', $result->getStreetNumber());
+        $this->assertEquals('23L-1', $result->getStreetNumber());
         $this->assertEquals('3e Binnenvestgracht', $result->getStreetName());
         $this->assertEquals('2312NR', $result->getPostalCode());
         $this->assertEquals('Leiden', $result->getLocality());
@@ -170,16 +170,16 @@ class NationaalGeoregisterTest extends BaseTestCase
     public function testReverse(): void
     {
         $provider = new NationaalGeoregister($this->getHttpClient());
-        $results = $provider->reverseQuery(ReverseQuery::fromCoordinates(52.16416908, 4.49098397));
+        $results = $provider->reverseQuery(ReverseQuery::fromCoordinates(52.16420333, 4.49157312));
 
         $this->assertInstanceOf(AddressCollection::class, $results);
         $this->assertCount(5, $results);
 
         $result = $results->first();
         $this->assertInstanceOf(Address::class, $result);
-        $this->assertEqualsWithDelta(52.16416908, $result->getCoordinates()->getLatitude(), 0.001);
-        $this->assertEqualsWithDelta(4.49098397, $result->getCoordinates()->getLongitude(), 0.001);
-        $this->assertEquals('23A', $result->getStreetNumber());
+        $this->assertEqualsWithDelta(52.16420333, $result->getCoordinates()->getLatitude(), 0.001);
+        $this->assertEqualsWithDelta(4.49157312, $result->getCoordinates()->getLongitude(), 0.001);
+        $this->assertEquals('23L-1', $result->getStreetNumber());
         $this->assertEquals('3e Binnenvestgracht', $result->getStreetName());
         $this->assertEquals('2312NR', $result->getPostalCode());
         $this->assertEquals('Leiden', $result->getLocality());
