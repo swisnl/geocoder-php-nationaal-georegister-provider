@@ -15,11 +15,11 @@
         "php": "^7.4 || ^8.0",
         "ext-json": "*",
         "geocoder-php/common-http": "^4.5",
-        "willdurand/geocoder": "^4.6"
+        "willdurand/geocoder": "^4.6|^5.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.9",
-        "geocoder-php/provider-integration-tests": "^1.6",
+        "geocoder-php/provider-integration-tests": "^1.6.4",
         "php-http/curl-client": "^2.0",
         "phpunit/phpunit": "^9.0"
     },
