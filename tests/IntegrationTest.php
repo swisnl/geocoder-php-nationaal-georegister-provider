@@ -10,16 +10,16 @@ use Swis\Geocoder\NationaalGeoregister\NationaalGeoregister;
 
 class IntegrationTest extends ProviderIntegrationTest
 {
-    protected $skippedTests = [
+    protected array $skippedTests = [
         'testGeocodeQuery' => 'Geocoding an address in the UK is not supported by this provider',
         'testReverseQueryWithNoResults' => 'This provider will always return a result',
     ];
 
-    protected $testIpv4 = false;
+    protected bool $testIpv4 = false;
 
-    protected $testIpv6 = false;
+    protected bool $testIpv6 = false;
 
-    protected function createProvider(ClientInterface $httpClient)
+    protected function createProvider(ClientInterface $httpClient): NationaalGeoregister
     {
         return new NationaalGeoregister($httpClient);
     }
@@ -29,8 +29,8 @@ class IntegrationTest extends ProviderIntegrationTest
         return __DIR__.'/.cached_responses';
     }
 
-    protected function getApiKey(): ?string
+    protected function getApiKey(): string
     {
-        return null;
+        return '';
     }
 }
