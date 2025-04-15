@@ -6,6 +6,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
+- Nothing
+
+## [1.7.0] - 2025-04-15
+
+### Added
+
+- Geocoder PHP 5 support
+
 ### Removed
 
 - PHP <8.0 support
