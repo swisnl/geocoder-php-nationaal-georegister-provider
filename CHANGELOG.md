@@ -6,7 +6,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
-- Nothing.
+### Removed
+
+- PHP <8.0 support
 
 ## [1.6.0] - 2023-04-07
 
